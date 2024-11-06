@@ -1,14 +1,14 @@
 import express from 'express';
 import { YoutubeTranscript } from 'youtube-transcript';
-import {cors} from "cors";
+import cors from 'cors';
 
 const app = express();
-app.use(cors);
-const port = 3001; 
+app.use(cors());
+const port = 3001;
 
-app.get("/", (req, res)=>{
-  return "working";
-})
+app.get("/", (req, res) => {
+  return res.send("working");
+});
 
 app.get('/api/transcript', (req, res) => {
   const videoUrl = req.query.url;
@@ -22,6 +22,7 @@ app.get('/api/transcript', (req, res) => {
       res.json({ transcript: txt });
     })
     .catch((error) => {
+      // If there's an error, send back the error message
       res.status(500).json({ error: 'Failed to fetch transcript', details: error.message });
     });
 });
