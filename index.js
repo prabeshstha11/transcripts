@@ -1,8 +1,14 @@
 import express from 'express';
 import { YoutubeTranscript } from 'youtube-transcript';
+import {cors} from "cors";
 
 const app = express();
+app.use(cors);
 const port = 3001; 
+
+app.get("/", (req, res)=>{
+  return "working";
+})
 
 app.get('/api/transcript', (req, res) => {
   const videoUrl = req.query.url;
